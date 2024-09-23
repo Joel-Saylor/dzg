@@ -1,0 +1,15 @@
+name = "Server"
+uuid = "d4f09b2d-7dbc-466a-84f4-44aeaf87a163"
+authors = ["st2-ev\n <steve.s.paul22@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Genie = "c43c736e-a2d1-11e8-161f-af95117fbd1e"
+Inflector = "6d011eab-0732-4556-8808-e463c76bf3b6"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Redis = "0cf705f9-a9e2-50d1-a699-2b372a39b750"
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
