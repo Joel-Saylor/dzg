@@ -2,7 +2,7 @@
 
 julia_version = "1.10.3"
 manifest_format = "2.0"
-project_hash = "4f7bce8884df5937df384e432f7508a8fb8a8867"
+project_hash = "dbf30990cb3e1e48e2baee1814f38fbcb5b137d1"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -1078,6 +1078,12 @@ version = "0.4.3+0"
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 version = "0.7.0"
+
+[[deps.SMTPClient]]
+deps = ["Base64", "Dates", "Distributed", "LibCURL", "Markdown", "Sockets"]
+git-tree-sha1 = "fc2e0dbf5df044c8790fb2d89f5c8684922b93b3"
+uuid = "c35d69d1-b747-5018-a192-25bc5e63c83d"
+version = "0.6.4"
 
 [[deps.Scratch]]
 deps = ["Dates"]

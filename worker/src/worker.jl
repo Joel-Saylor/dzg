@@ -1,6 +1,8 @@
 include("helpers.jl")
+include("emailer.jl")
 
 using .SourceAnalysisHelpers
+using .Emailer
 using Redis
 using JSON
 
@@ -54,6 +56,16 @@ function main()
             JSON.print(f, output_data)
         end
         set(rconn, id_type, COMPLETE)
+        if metadata["email"] != ""
+            project_name = metadata["project_name"]
+            message = ""
+            if task_metadata["type"] == TYPE_SOURCEANALYSIS
+                message = "Your Source Analysis Report for $project_name is ready.\nClick here to view: https://dzgrainalyzer.eoas.ubc.ca/report/source-analysis/$id"
+            else
+                message = "Your Input Viz Report for $project_name is ready.\nClick here to view: https://dzgrainalyzer.eoas.ubc.ca/report/input-viz/$id"
+            end
+            Emailer.send_email(metadata["email"], "DZG Report Ready for $project_name", message)
+        end
     catch e
         set(rconn, id_type, FAILED)
         open("$target_dir/error-response.json", "w") do f
@@ -63,7 +75,6 @@ function main()
             ))
         end
     end
-    # TODO: Send email
 end
 
 
