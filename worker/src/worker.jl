@@ -5,6 +5,7 @@ using .SourceAnalysisHelpers
 using .Emailer
 using Redis
 using JSON
+using HTTP
 
 rconn = RedisConnection()
 
@@ -16,6 +17,14 @@ FAILED = "4"
 TASKQUEUE = "taskqueue"
 TYPE_INPUTVIZ = "InputViz"
 TYPE_SOURCEANALYSIS = "SourceAnalysis"
+
+function track(count_identifier::String)
+    url = "https://app.piratepx.com/ship"
+    params = Dict("p" => "02d18606-df2d-4388-9459-173712143d26", "i" => count_identifier)
+    query = "?" * join([key * "=" * HTTP.escapeuri(value) for (key, value) in pairs(params)], "&")
+    full_url = url * query
+    response = HTTP.get(full_url)
+end
 
 function main()
     # wait for task from redis queue
@@ -40,6 +49,7 @@ function main()
         if type == TYPE_INPUTVIZ
             output_data = SourceAnalysisHelpers.create_input_viz_data("$target_dir/transformed.xlsx")
             output_file = "$target_dir/input-viz-response.json"
+            track("successful_input_viz_report")
         elseif type == TYPE_SOURCEANALYSIS
             if task_metadata["override_rank"]
                 output_data = SourceAnalysisHelpers.rank_sources_custom_rank(
@@ -50,6 +60,7 @@ function main()
                 output_data = SourceAnalysisHelpers.rank_sources("$target_dir/transformed.xlsx")
             end
             output_file = "$target_dir/source-analysis-response.json"
+            track("successful_source_analysis_report")
         end
 
         open(output_file, "w") do f
@@ -68,6 +79,7 @@ function main()
         end
     catch e
         set(rconn, id_type, FAILED)
+        track("failed_report")
         open("$target_dir/error-response.json", "w") do f
             JSON.print(f, Dict(
                 "message" => hasproperty(e, :msg) ? "Invalid File Formatting: $(e.msg)" : "Unexpected Error. Start New.",

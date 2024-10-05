@@ -18,7 +18,7 @@ onMounted(() => {
     const elements = elRef.value?.querySelectorAll(selector);
     const classes = buttonVariants({ variant: "ghost", size: "xs" }).split(" ");
     elements?.forEach((el) =>
-      el.classList.add(...classes, "!inline-flex", "!mr-2"),
+      el.classList.add(...classes, "!inline-flex", "!mr-2")
     );
   });
 });
@@ -31,7 +31,7 @@ function onLegendItemClick(d, i) {
     // reset filter
     emits(
       "update:items",
-      props.items.map((item) => ({ ...item, inactive: false })),
+      props.items.map((item) => ({ ...item, inactive: false }))
     );
   } else {
     // apply selection, set other item as inactive
@@ -40,15 +40,15 @@ function onLegendItemClick(d, i) {
       props.items.map((item) =>
         item.name === d.name
           ? { ...d, inactive: false }
-          : { ...item, inactive: true },
-      ),
+          : { ...item, inactive: true }
+      )
     );
   }
 }
 </script>
 
 <template>
-  <div ref="elRef" class="w-max">
+  <div ref="elRef" class="w-full block mb-5">
     <VisBulletLegend :items="items" :on-legend-item-click="onLegendItemClick" />
   </div>
 </template>

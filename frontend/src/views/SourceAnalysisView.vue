@@ -198,8 +198,11 @@ export default {
 
 <template>
   <div class="h-min-screen allbutFooter">
-    <div v-if="currentPageState === PageStates.LOADING">
-      <Loader2 class="w-10 h-10 animate-spin" />
+    <div
+      v-if="currentPageState === PageStates.LOADING"
+      class="flex justify-center"
+    >
+      <Loader2 class="w-14 h-14 animate-spin mt-12" />
     </div>
     <div v-else-if="currentPageState === PageStates.PROCESSING">
       <p class="text-center mt-5 text-xl">{{ message }}</p>
@@ -280,6 +283,11 @@ export default {
         >
           Start Over
         </Button>
+      </div>
+      <div class="flex justify-center gap-5">
+        <h3 class="font-semibold text-xl text-gray-800">
+          This report will be available for 7 days from the date of creation.
+        </h3>
       </div>
     </div>
   </div>

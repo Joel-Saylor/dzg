@@ -1,7 +1,7 @@
 <template>
   <div class="w-[80%] mx-auto">
     <h1 class="font-bold text-xl">Privacy Policy</h1>
-    <p class="my-5">Last updated: July 10, 2024</p>
+    <p class="my-5">Last updated: Oct 5, 2024</p>
     <p>
       This Privacy Policy describes Our policies and procedures on the
       collection, use and disclosure of Your information when You use the
@@ -82,6 +82,13 @@
       </li>
       <li>
         <p>
+          <strong>Email</strong> refers to the email we optionally collect to
+          contact you after the report is ready. It will be stored on the server
+          temporarily for 7 days from when you request the report.
+        </p>
+      </li>
+      <li>
+        <p>
           <strong>Website</strong> refers to DZ Grainalyzer, accessible from
           <a
             href="https://dzgrainalyzer.eoas.ubc.ca"
@@ -135,6 +142,15 @@
         device.
       </p>
     </div>
+    <div class="ml-5">
+      <h4 class="font-bold">Email</h4>
+      <p>
+        We collect emails to notify the user when the report is ready. This
+        information is optional and is only used to notify the user when the
+        report is ready. It will be stored on the server temporarily for 7 days
+        from creation of report.
+      </p>
+    </div>
     <h4 class="font-bold">Tracking Technologies and Cookies</h4>
     <p>
       We do not use Cookies and similar tracking technologies to track the
@@ -157,7 +173,7 @@
     <p>
       The Company will retain Your Personal Data only for as long as is
       necessary for the purposes set out in this Privacy Policy. We will retain
-      and use Your uploaded files on server for 48 hours or less. Anonymous
+      and use Your uploaded files on server for 7 days or less. Anonymous
       analaytics might be stored for longer.
     </p>
     <br />
@@ -185,7 +201,8 @@
     <h3 class="font-bold">Delete Your Personal Data</h3>
     <p>
       We do not persist any identifiable data, so there is no need to request a
-      deletion. The uploaded files are deleted after 48 hours or less.
+      deletion. The uploaded files and provided email are deleted after 7 days
+      or less.
     </p>
     <br />
 

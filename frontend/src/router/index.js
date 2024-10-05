@@ -21,7 +21,7 @@ const router = createRouter({
     },
     {
       path: "/report/source-analysis/:id",
-      name: "report",
+      name: "source-analysis-report",
       component: SourceAnalysisView,
     },
     {
@@ -44,6 +44,15 @@ const router = createRouter({
       redirect: "/404",
     },
   ],
+});
+
+router.afterEach((to) => {
+  const query = new URLSearchParams({
+    p: "02d18606-df2d-4388-9459-173712143d26",
+    i: to.name,
+  });
+
+  fetch(`https://app.piratepx.com/ship?${query.toString()}`);
 });
 
 export default router;

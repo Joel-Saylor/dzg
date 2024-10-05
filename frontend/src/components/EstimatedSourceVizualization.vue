@@ -49,9 +49,18 @@ export default {
           tickAmount: 10,
           labels: {
             formatter: function (val) {
-              return parseFloat(val).toFixed(1);
+              return parseFloat(val).toFixed(0);
             },
           },
+        },
+        yaxis: {
+          stepSize: 1,
+          labels: {
+            formatter: function (val) {
+              return val.toFixed(0);
+            },
+          },
+          min: 1,
         },
         tooltip: {
           enabled: true,
@@ -77,6 +86,10 @@ export default {
   },
   methods: {
     interpolateColor(value, minValue, maxValue, colors) {
+      maxValue = 1.0;
+      if (value > maxValue) {
+        value = maxValue;
+      }
       if (minValue === maxValue) {
         throw new Error("minValue and maxValue cannot be the same");
       }
@@ -256,15 +269,11 @@ export default {
               class="w-5 h-full bg-gradient-to-b from-[#CCFFBD] via-[#7ECA9C] via-[#40394A] to-[#1C1427]"
             ></div>
             <div class="flex flex-col justify-between h-full ml-2">
-              <span>{{ Math.round(maxValue * 10) / 10 }}</span>
-              <span>{{
-                Math.round(((maxValue + midValue) / 2) * 10) / 10
-              }}</span>
-              <span>{{ Math.round(midValue * 10) / 10 }}</span>
-              <span>{{
-                Math.round(((midValue + minValue) / 2) * 10) / 10
-              }}</span>
-              <span>{{ Math.round(minValue * 10) / 10 }}</span>
+              <span>&#8805;{{ Math.round(1 * 10) / 10 }}</span>
+              <span>{{ Math.round(((1 + 0.5) / 2) * 10) / 10 }}</span>
+              <span>{{ Math.round(0.5 * 10) / 10 }}</span>
+              <span>{{ Math.round(((0.5 + 0.0) / 2) * 10) / 10 }}</span>
+              <span>{{ Math.round(0.0 * 10) / 10 }}</span>
             </div>
           </div>
         </div>

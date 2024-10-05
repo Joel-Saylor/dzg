@@ -5,6 +5,7 @@ using Genie, Genie.Router, Genie.Requests, UUIDs, Genie.Renderer.Json
 using Random
 using JSON
 using Redis
+using HTTP
 
 rconn = RedisConnection()
 
@@ -21,6 +22,15 @@ KEYS_EXPIRE_IN = 604800
 route("/api/hello", method=GET) do
     return "DZG backend is running!"
 end
+
+function track(count_identifier::String)
+    url = "https://app.piratepx.com/ship"
+    params = Dict("p" => "02d18606-df2d-4388-9459-173712143d26", "i" => count_identifier)
+    query = "?" * join([key * "=" * HTTP.escapeuri(value) for (key, value) in pairs(params)], "&")
+    full_url = url * query
+    response = HTTP.get(full_url)
+end
+
 
 route("/api/upload", method=POST) do
     if !infilespayload(:inputfile)
@@ -97,6 +107,7 @@ route("/api/upload", method=POST) do
     end
     set(rconn, "$id:$TYPE_INPUTVIZ", INITIALIZED)
     expire(rconn, "$id:$TYPE_INPUTVIZ", KEYS_EXPIRE_IN)
+    track("file_upload")
     return Genie.Renderer.Json.json(
         Dict(
             "message" => "Success",

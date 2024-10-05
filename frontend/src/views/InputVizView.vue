@@ -146,8 +146,11 @@ export default {
 
 <template>
   <div class="h-min-screen allbutFooter">
-    <div v-if="currentPageState === PageStates.LOADING">
-      <Loader2 class="w-10 h-10 animate-spin" />
+    <div
+      v-if="currentPageState === PageStates.LOADING"
+      class="flex justify-center"
+    >
+      <Loader2 class="w-14 h-14 animate-spin mt-12" />
     </div>
     <div v-else-if="currentPageState === PageStates.PROCESSING">
       <p class="text-center mt-5 text-xl">{{ message }}</p>
@@ -189,6 +192,10 @@ export default {
                   <strong>Caution:</strong> We recommend running automatic rank
                   identification multiple times to determine if the selected
                   optimum rank is stable.
+                </li>
+                <li class="mt-5">
+                  This report will be available for 7 days from the date of
+                  creation.
                 </li>
               </ul>
             </div>

@@ -6,6 +6,7 @@ version = "0.1.0"
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 FFMPEG = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 MatrixTensorFactor = "b7339fc4-c5a0-4c8f-934d-9fd05475ae37"
 NamedArrays = "86f7a689-2022-50b4-a561-43c23ac3c673"

@@ -52,7 +52,10 @@ export default {
         :sources="sourceIdentification['data']['sources']"
       />
     </TabsContent>
-    <TabsList class="mt-2" v-if="sourceIdentificationPerSink != null">
+    <TabsList
+      class="mt-2 h-auto block"
+      v-if="sourceIdentificationPerSink != null"
+    >
       <TabsTrigger
         v-for="sourceIdentification in sourceIdentificationPerSink"
         :value="sourceIdentification['name']"
