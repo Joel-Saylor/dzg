@@ -8,6 +8,7 @@ Made up of:
 - worker (main algorithm that connects to a redis queue to work on jobs)
 - redis (queue and and simble db)
 - nginx (reverse proxy and static files (frontend) server)
+- cron job to delete files in the `data` folder that is older than 7 days
 
 ![image](https://github.com/user-attachments/assets/16c8597f-02cb-4293-96ef-6ec54a748465)
 
@@ -33,7 +34,7 @@ sudo systemctl stop dzg-worker
 
 then run this to install any newly added packages on julia server:
 ```
-cd server
+cd dzg/server
 julia --project=. --banner=no --eval="import Pkg; Pkg.activate(\".\"); Pkg.instantiate(); Pkg.precompile();"
 julia --project=. --banner=no --eval="using Pkg; using Genie; Genie.Generator.write_secrets_file()"
 cd ..
@@ -67,6 +68,15 @@ python3 example.py
 then once the scriptexecutes without errors, then you can safely start hte nginx server to make it accessible to the world
 ```
 sudo systemctl start nginx
+```
+
+make sure cronjob is up by running:
+```
+crontab -l
+```
+and it should have
+```
+0 0 * * * find /home/webadmin/dzg/data -mindepth 1 -ctime +7 -print -exec rm -rf {} \; 2>/dev/null
 ```
 
 Note: there is a script called `deploy.sh` that runs all the things mentioned above after you ssh in, but doing it all at once sometimes leads to weird errors, so best to do it one at a time.
