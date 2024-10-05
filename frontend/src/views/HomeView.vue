@@ -73,6 +73,11 @@ export default {
         });
         this.loading = false;
         this.selectedFile = null;
+      } finally {
+        this.selectedFile = null;
+        this.projectName = "";
+        this.email = "";
+        document.getElementById("xlsx").value = null;
       }
     },
   },

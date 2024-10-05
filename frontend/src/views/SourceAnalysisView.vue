@@ -52,6 +52,8 @@ export default {
       learnedCoefficientsSources: null,
       inputVizTabValue: "",
       learnedDensitiesTabValue: "",
+      expiryMessage:
+        "This report will be available for 7 days from the date of creation.",
     };
   },
   methods: {
@@ -180,6 +182,11 @@ export default {
         this.learnedCoefficients = data["learned_coefficients"];
         this.learnedCoefficientsSources = data["learned_coefficients_sources"];
         this.currentPageState = PageStates.COMPLETE;
+        if ("remaining_time" in report) {
+          if (report["remaining_time"] !== "") {
+            this.expiryMessage = `This report will be available for next ${report["remaining_time"]} and will expire on ${report["expiry_date"]}.`;
+          }
+        }
       } else {
         this.message = report["message"];
         this.currentPageState = PageStates.PROCESSING;
@@ -286,7 +293,7 @@ export default {
       </div>
       <div class="flex justify-center gap-5">
         <h3 class="font-semibold text-xl text-gray-800">
-          This report will be available for 7 days from the date of creation.
+          {{ expiryMessage }}
         </h3>
       </div>
     </div>

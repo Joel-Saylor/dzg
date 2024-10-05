@@ -39,6 +39,8 @@ export default {
       overrideCheck: false, // COMPLETE page state
       customRank: 0, // COMPLETE page state
       runningSourceAnalysis: false, // COMPLETE page state
+      expiryMessage:
+        "This report will be available for 7 days from the date of creation.",
     };
   },
   methods: {
@@ -126,8 +128,11 @@ export default {
         this.inputVizSinks = data["sinks"];
         this.inputVizTabValue = this.inputVizData[0]["name"];
         this.currentPageState = PageStates.COMPLETE;
-        console.log(this.inputVizData);
-        console.log(this.inputVizSinks);
+        if ("remaining_time" in report) {
+          if (data["remaining_time"] !== "") {
+            this.expiryMessage = `This report will be available for next ${report["remaining_time"]} and will expire on ${report["expiry_date"]}.`;
+          }
+        }
       } else {
         this.message = report["message"];
         this.currentPageState = PageStates.PROCESSING;
@@ -194,8 +199,7 @@ export default {
                   optimum rank is stable.
                 </li>
                 <li class="mt-5">
-                  This report will be available for 7 days from the date of
-                  creation.
+                  {{ expiryMessage }}
                 </li>
               </ul>
             </div>

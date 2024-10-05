@@ -6,6 +6,7 @@ using Random
 using JSON
 using Redis
 using HTTP
+using Dates
 
 rconn = RedisConnection()
 
@@ -91,6 +92,7 @@ route("/api/upload", method=POST) do
                 "id" => id,
                 "project_name" => project_name,
                 "email" => email,
+                "created" => Dates.format(Dates.now(), "yyyy-mm-dd HH:MM:SS")
             )
         )
     end
@@ -144,12 +146,29 @@ route("/api/report/input-viz/:id", method=GET) do
         )
     elseif status == COMPLETE
         response_data = Dict()
+        remaining_time = ""
+        expiry_date = ""
         open("$target_dir/input-viz-response.json", "r") do f
             response_data = JSON.parse(f)
         end
+        open("$target_dir/metadata.json", "r") do f
+            metadata = JSON.parse(f)
+            if "created" in keys(metadata)
+                datetime_val = DateTime(metadata["created"], dateformat"yyyy-mm-dd HH:MM:SS")
+                now_datetime = now()
+                seven_day_mark = datetime_val + Day(7)
+                time_left = seven_day_mark - now_datetime
+                days_left = time_left.value / (24 * 60 * 60 * 1000)
+                days_left = floor(days_left * 10) / 10
+                remaining_time = "$days_left days"
+                expiry_date = Dates.format(seven_day_mark, "yyyy-u-dd HH:MM:SS")
+            end
+        end
         return Genie.Renderer.Json.json(Dict(
             "message" => "Success",
-            "data" => response_data
+            "data" => response_data,
+            "remaining_time" => remaining_time,
+            "expiry_date" => expiry_date
         ))
     elseif status == FAILED
         response_data = Dict()
@@ -210,12 +229,29 @@ route("/api/report/source-analysis/:id", method=GET) do
         )
     elseif status == COMPLETE
         response_data = Dict()
+        remaining_time = ""
+        expiry_date = ""
         open("$target_dir/source-analysis-response.json", "r") do f
             response_data = JSON.parse(f)
         end
+        open("$target_dir/metadata.json", "r") do f
+            metadata = JSON.parse(f)
+            if "created" in keys(metadata)
+                datetime_val = DateTime(metadata["created"], dateformat"yyyy-mm-dd HH:MM:SS")
+                now_datetime = now()
+                seven_day_mark = datetime_val + Day(7)
+                time_left = seven_day_mark - now_datetime
+                days_left = time_left.value / (24 * 60 * 60 * 1000)
+                days_left = floor(days_left * 10) / 10
+                remaining_time = "$days_left days"
+                expiry_date = Dates.format(seven_day_mark, "yyyy-u-dd HH:MM:SS")
+            end
+        end
         return Genie.Renderer.Json.json(Dict(
             "message" => "Success",
-            "data" => response_data
+            "data" => response_data,
+            "remaining_time" => remaining_time,
+            "expiry_date" => expiry_date
         ))
     elseif status == FAILED
         response_data = Dict()
