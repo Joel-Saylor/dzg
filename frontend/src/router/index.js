@@ -48,11 +48,14 @@ const router = createRouter({
 
 router.afterEach((to) => {
   const query = new URLSearchParams({
-    p: "02d18606-df2d-4388-9459-173712143d26",
     i: to.name,
   });
 
-  fetch(`https://app.piratepx.com/ship?${query.toString()}`);
+  const url = import.meta.env.PROD
+    ? `/api/piratepx?${query.toString()}`
+    : `${import.meta.env.VITE_BACKEND_URL}/api/piratepx?${query.toString()}`;
+
+  fetch(url);
 });
 
 export default router;

@@ -32,6 +32,13 @@ function track(count_identifier::String)
     response = HTTP.get(full_url)
 end
 
+route("/api/piratepx", method=GET) do
+    identifier = params(:i, "")
+    if identifier != ""
+        track("frontend:$identifier")
+    end
+    return Genie.Renderer.Json.json(Dict("message" => "Success"))
+end
 
 route("/api/upload", method=POST) do
     if !infilespayload(:inputfile)

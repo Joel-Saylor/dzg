@@ -227,7 +227,6 @@ export default {
         ),
       });
     }
-    console.log(this.series);
   },
 };
 </script>
@@ -265,6 +264,7 @@ export default {
             <p class="text-lg">grain index</p>
           </div>
           <div class="flex items-center">
+            <p class="rotate-[-90deg] text-lg w-7">confidence</p>
             <div
               class="w-5 h-full bg-gradient-to-b from-[#CCFFBD] via-[#7ECA9C] via-[#40394A] to-[#1C1427]"
             ></div>
