@@ -9,13 +9,15 @@ Made up of:
 - redis (queue and and simble db)
 - nginx (reverse proxy and static files (frontend) server)
 
+![image](https://github.com/user-attachments/assets/16c8597f-02cb-4293-96ef-6ec54a748465)
+
 The static files of the built frontend server is served as static files via an a nginx server.
 The server is responsible for queueing tasks on the redis queue and the worker runs in the background and does each job ob the queue one by one and sends out an email once done (if email is provided). We use a custom gmail account with email: dzgrainalyzer@gmail.com to send out notification emails to users.
 
 ### Deployment:
 run `npm run build` to build out the frontend.
 
-then, you can push your code to the server using `upload.sh`, paste in credential when asked for it.
+then, you can push your code to the server using `upload.sh`, paste in credentials when asked for it.
 
 then, ssh into the server,
 ```
