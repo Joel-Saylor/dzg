@@ -21,9 +21,6 @@ run `npm run build` to build out the frontend.
 then, you can push your code to the server using `upload.sh`, paste in credentials when asked for it.
 
 then, ssh into the server,
-```
-ssh webadmin@dzgrainalyzer.eoas.ubc.ca
-```
 
 then start by stopping these services:
 ```
