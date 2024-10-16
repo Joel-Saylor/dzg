@@ -81,11 +81,3 @@ Note: there is a script called `deploy.sh` that runs all the things mentioned ab
 
 You should always manually test the app once all this is done to make sure everything is working as expected.
 
-### Misc
-
-This app has an anonymous analytics dashboard at https://app.piratepx.com/m1ZeTXWu1pbyAc2HSp5xDKz-0NZEEFCvX_zpm1k3ENtX3nSCoprCbymaxSFvaBJ4
-- identifiers with "-" in them or starts with "frontend:" are page visits by users
-- identifiers with "_" are from the backend
-
-All credentials should have been shared by email to joel.
-
