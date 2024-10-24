@@ -16,6 +16,7 @@ import { RouterView } from "vue-router";
         />
       </div class="flex gap-3">
       <div class="flex flex-col p-5">
+        <a class="underline" href="https://github.com/Joel-Saylor/dzg" target="_blank">Github Repo</a>
         <a class="underline" href="/terms">Terms & Conditions</a>
         <a class="underline" href="/privacy-policy">Privacy Policy</a>
         <div class="text-center">Web app made by <a class="underline" href="https://stevepaul.xyz/" target="_blank">Steve Paul</a></div>
