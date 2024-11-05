@@ -16,7 +16,7 @@ function send_email(recipient, subject, body_text)
         "Subject: $subject\r\n" *
         "\r\n" *
         "$body_text\r\n")
-    url = "smtps://smtp.gmail.com:465"
+    url = "smtp://smtp.gmail.com:587"
     rcpt = [recipient]
     resp = send(url, rcpt, from, body, opt)
 end
