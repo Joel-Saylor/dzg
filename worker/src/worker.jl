@@ -1,3 +1,4 @@
+module Worker
 include("helpers.jl")
 include("emailer.jl")
 
@@ -6,6 +7,8 @@ using .Emailer
 using Redis
 using JSON
 using HTTP
+
+export run
 
 rconn = RedisConnection()
 
@@ -89,7 +92,10 @@ function main()
     end
 end
 
+function run()
+    while true
+        main()
+    end
+end
 
-while true
-    main()
 end
